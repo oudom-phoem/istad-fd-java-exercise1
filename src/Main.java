@@ -6,6 +6,8 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int[][] seats = null;
+        int rows = 0, columns = 0;
+        char charRow = 'A';
 
         while (true){
             System.out.print("""
@@ -23,14 +25,12 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.print("Please enter number of rows: ");
-                    byte rows = scanner.nextByte();
+                    rows = scanner.nextByte();
 
                     System.out.print("Please enter number of columns: ");
-                    byte columns = scanner.nextByte();
+                    columns = scanner.nextByte();
 
                     seats = new int[rows][columns];
-
-                    char charRow = 'A';
 
                     for (int i = 0; i < rows; i++) {
                         System.out.print("[");
@@ -100,6 +100,30 @@ public class Main {
                             System.out.println("Invalid seat code. Please try again.");
                         }
                     }
+                    System.out.println();
+                    break;
+                case 4:
+                    if (seats == null) {
+                        System.out.println("Seats have not been set up. Please set up the seats first.");
+                    } else {
+                        for (int i = 0; i < rows; i++) {
+                            System.out.print("[");
+                            for (int j = 0; j < columns; j++) {
+                                String seatCode = charRow + "-" + (j + 1) + ":";
+                                String bookStatus = "";
+                                if (seats[i][j] == 0) {
+                                    bookStatus = j == columns - 1 ? "AV" : "AV, ";
+                                } else {
+                                    bookStatus = j == columns - 1 ? "BO" : "BO, ";
+                                }
+                                System.out.print(seatCode + bookStatus);
+                            }
+                            System.out.print("]");
+                            charRow++;
+                            System.out.println();
+                        }
+                    }
+
                     System.out.println();
                     break;
                 case 6:
