@@ -73,9 +73,32 @@ public class Main {
                         } else {
                             System.out.println("Invalid seat code. Please try again.");
                         }
+                    }
+                    System.out.println();
+                    break;
+                case 3:
+                    if (seats == null) {
+                        System.out.println("Seats have not been set up. Please set up the seats first.");
+                    } else {
+                        scanner.nextLine();
+                        System.out.print("Please enter the seat code to cancel (e.g., B3): ");
+                        String seatCodeToCancel = scanner.nextLine();
+                        char seatRowChar = seatCodeToCancel.charAt(0);
+                        String seatColumnStr = seatCodeToCancel.substring(1);
 
-                        seats[seatRowIndex][seatColumnIndex] = 1;
+                        int seatRowIndex = seatRowChar - 'A';
+                        int seatColumnIndex = Integer.parseInt(seatColumnStr) - 1;
 
+                        if (seatRowIndex >= 0 && seatRowIndex < seats.length && seatColumnIndex >= 0 && seatColumnIndex < seats[0].length) {
+                            if (seats[seatRowIndex][seatColumnIndex] == 1) {
+                                seats[seatRowIndex][seatColumnIndex] = 0;
+                                System.out.println("Seat " + seatCodeToCancel + " successfully cancelled.");
+                            } else {
+                                System.out.println("Seat " + seatCodeToCancel + " is not book.");
+                            }
+                        } else {
+                            System.out.println("Invalid seat code. Please try again.");
+                        }
                     }
                     System.out.println();
                     break;
