@@ -113,6 +113,7 @@ public class Main {
 
         if (seats[seatRowIndex][seatColumnIndex] == 1) {
             seats[seatRowIndex][seatColumnIndex] = 0;
+            removeBookingHistory(seatCodeToCancel);
             System.out.println("Seat " + seatCodeToCancel + " successfully cancelled.");
             displaySeats(rows, columns, seats, charRow);
         } else {
@@ -174,5 +175,21 @@ public class Main {
         } else {
             System.out.println("Booking history is full. Cannot store more bookings.");
         }
+    }
+
+    static void removeBookingHistory(String seatCode) {
+        int indexToRemove = 0;
+
+        for (int i = 0; i < bookingCount; i++) {
+            if (bookingHistory[i][0].equals(seatCode)) {
+                indexToRemove = i;
+                break;
+            }
+        }
+
+        for (int i = indexToRemove; i < bookingCount; i++) {
+            bookingHistory[i] = bookingHistory[i + 1];
+        }
+        bookingCount--;
     }
 }
