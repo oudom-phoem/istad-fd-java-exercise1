@@ -133,6 +133,7 @@ public class Main {
             for (int i = 0; i < bookingCount; i++) {
                 System.out.println("Seat: " + bookingHistory[i][0] + ", Date: " + bookingHistory[i][1]);
             }
+            System.out.println("Total booked: " + bookingCount);
         }
     }
 
