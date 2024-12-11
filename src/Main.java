@@ -37,7 +37,7 @@ public class Main {
 
     static void displayMenu() {
         System.out.print("""
-                Cinema Hall Seat Booking Application
+                \nCinema Hall Seat Booking Application
                 Menu:
                 1. Set up the seats
                 2. Book a seat
@@ -62,9 +62,9 @@ public class Main {
         for (int i = 0; i < rows; i++) {
             System.out.print("[");
             for (int j = 0; j < columns; j++) {
-                String seatCode = charRow + "-" + (j + 1) + ":";
-                String bookStatus = seats[i][j] == 0 ? "AV" : "BO";
-                System.out.print(seatCode + bookStatus + (j == columns - 1 ? "" : ", "));
+                String seatCode = charRow + "" + (j + 1) + ":";
+                String bookStatus = seats[i][j] == 0 ? "⬜" : "🟩";
+                System.out.print(seatCode + bookStatus + (j == columns - 1 ? "" : "| "));
             }
             System.out.println("]");
             charRow++;
@@ -74,7 +74,7 @@ public class Main {
     static void bookSeat(Scanner scanner, int[][] seats, int rows, int columns, char charRow) {
         if (!isSeatsSet(seats)) return;
 
-        scanner.nextLine(); // Clear buffer
+        scanner.nextLine();
         System.out.print("Enter the seat code to book (e.g., B3): ");
         String seatCodeToBook = scanner.nextLine().toUpperCase();
 
@@ -99,7 +99,7 @@ public class Main {
     static void cancelBooking(Scanner scanner, int[][] seats, int rows, int columns, char charRow) {
         if (!isSeatsSet(seats)) return;
 
-        scanner.nextLine(); // Clear buffer
+        scanner.nextLine();
         System.out.print("Enter the seat code to cancel (e.g., B3): ");
         String seatCodeToCancel = scanner.nextLine().toUpperCase();
 
