@@ -117,17 +117,6 @@ public class Main {
         }
     }
 
-    static  int[] parseSeatCode(String seatCode, int rows, int columns) {
-        if (!isValidSeatCode(seatCode, rows, columns)) {
-            System.out.println("Invalid seat code. Please try again.");
-            return null;
-        }
-
-        int seatRowIndex = seatCode.charAt(0) - 'A';
-        int seatColumnIndex = Integer.parseInt(seatCode.substring(1)) - 1;
-        return new int[]{seatRowIndex, seatColumnIndex};
-    }
-
     static void displaySeatsIfSet(int[][] seats, int rows, int columns, char charRow) {
         if (!isSeatsSet(seats)) return;
         displaySeats(rows, columns, seats, charRow);
@@ -156,6 +145,17 @@ public class Main {
             return false;
         }
         return true;
+    }
+
+    static  int[] parseSeatCode(String seatCode, int rows, int columns) {
+        if (!isValidSeatCode(seatCode, rows, columns)) {
+            System.out.println("Invalid seat code. Please try again.");
+            return null;
+        }
+
+        int seatRowIndex = seatCode.charAt(0) - 'A';
+        int seatColumnIndex = Integer.parseInt(seatCode.substring(1)) - 1;
+        return new int[]{seatRowIndex, seatColumnIndex};
     }
 
     static boolean isValidSeatCode(String seatCode, int rows, int columns) {
