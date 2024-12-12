@@ -78,13 +78,11 @@ public class Main {
         System.out.print("Enter the seat code to book (e.g., B3): ");
         String seatCodeToBook = scanner.nextLine().toUpperCase();
 
-        if (!isValidSeatCode(seatCodeToBook, rows, columns)) {
-            System.out.println("Invalid seat code. Please try again.");
-            return;
-        }
+        int[] seatIndices = parseSeatCode(seatCodeToBook, rows, columns);
+        if (seatIndices == null) return;
 
-        int seatRowIndex = seatCodeToBook.charAt(0) - 'A';
-        int seatColumnIndex = Integer.parseInt(seatCodeToBook.substring(1)) - 1;
+        int seatRowIndex = seatIndices[0];
+        int seatColumnIndex = seatIndices[1];
 
         if (seats[seatRowIndex][seatColumnIndex] == 0) {
             seats[seatRowIndex][seatColumnIndex] = 1;
@@ -103,13 +101,11 @@ public class Main {
         System.out.print("Enter the seat code to cancel (e.g., B3): ");
         String seatCodeToCancel = scanner.nextLine().toUpperCase();
 
-        if (!isValidSeatCode(seatCodeToCancel, rows, columns)) {
-            System.out.println("Invalid seat code. Please try again.");
-            return;
-        }
+        int[] seatIndices = parseSeatCode(seatCodeToCancel, rows, columns);
+        if (seatIndices == null) return;
 
-        int seatRowIndex = seatCodeToCancel.charAt(0) - 'A';
-        int seatColumnIndex = Integer.parseInt(seatCodeToCancel.substring(1)) - 1;
+        int seatRowIndex = seatIndices[0];
+        int seatColumnIndex = seatIndices[1];
 
         if (seats[seatRowIndex][seatColumnIndex] == 1) {
             seats[seatRowIndex][seatColumnIndex] = 0;
@@ -119,6 +115,17 @@ public class Main {
         } else {
             System.out.println("Seat " + seatCodeToCancel + " is not booked.");
         }
+    }
+
+    static  int[] parseSeatCode(String seatCode, int rows, int columns) {
+        if (!isValidSeatCode(seatCode, rows, columns)) {
+            System.out.println("Invalid seat code. Please try again.");
+            return null;
+        }
+
+        int seatRowIndex = seatCode.charAt(0) - 'A';
+        int seatColumnIndex = Integer.parseInt(seatCode.substring(1)) - 1;
+        return new int[]{seatRowIndex, seatColumnIndex};
     }
 
     static void displaySeatsIfSet(int[][] seats, int rows, int columns, char charRow) {
