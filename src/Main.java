@@ -20,9 +20,9 @@ public class Main {
             displayMenu();
             byte choice = scanner.nextByte();
 
-            switch (choice) {v
+            switch (choice) {
                 case 1 -> {
-                    if (isAdminValid(getUsername(scanner), getPassword(scanner)) {
+                    if (isAdminValid(getUsername(scanner), getPassword(scanner))) {
                         rows = getRows(scanner);
                         columns = getColumns(scanner);
                         seats = new int[rows][columns];
