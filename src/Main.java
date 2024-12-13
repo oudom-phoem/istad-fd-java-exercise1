@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    static final String ADMIN_USERNAME = "admin";
+    static final String ADMIN_PASSWORD = "password";
     static final int MAX_HISTORY = 100;
     static String[][] bookingHistory = new String[MAX_HISTORY][2];
     static int bookingCount = 0;
@@ -18,12 +20,14 @@ public class Main {
             displayMenu();
             byte choice = scanner.nextByte();
 
-            switch (choice) {
+            switch (choice) {v
                 case 1 -> {
-                    rows = getRows(scanner);
-                    columns = getColumns(scanner);
-                    seats = new int[rows][columns];
-                    displaySeats(rows, columns, seats, charRow);
+                    if (isAdminValid(getUsername(scanner), getPassword(scanner)) {
+                        rows = getRows(scanner);
+                        columns = getColumns(scanner);
+                        seats = new int[rows][columns];
+                        displaySeats(rows, columns, seats, charRow);
+                    }
                 }
                 case 2 -> bookSeat(scanner, seats, rows, columns, charRow);
                 case 3 -> cancelBooking(scanner, seats, rows, columns, charRow);
@@ -39,13 +43,41 @@ public class Main {
         System.out.print("""
                 \nCinema Hall Seat Booking Application
                 Menu:
-                1. Set up the seats
+                1. Set up the seats (Admin only)
                 2. Book a seat
                 3. Cancel a booking
                 4. Display seats
                 5. View booking history
                 6. Exit
                 >\s""");
+    }
+
+    static String getUsername(Scanner scanner) {
+        scanner.nextLine();
+        System.out.print("Enter username: ");
+        return scanner.nextLine();
+    }
+
+    static String getPassword(Scanner scanner) {
+        System.out.print("Enter password: ");
+        return scanner.nextLine();
+    }
+
+    static boolean validateUsername(String inputUsername) {
+        return inputUsername.equals(ADMIN_USERNAME);
+    }
+
+    static boolean validatePassword(String inputPassword) {
+        return inputPassword.equals(ADMIN_PASSWORD);
+    }
+
+    static boolean isAdminValid(String username, String password) {
+        if (validateUsername(username) && validatePassword(password)) {
+            return true;
+        } else {
+            System.out.println("Incorrect username or password!");
+            return false;
+        }
     }
 
     static int getRows(Scanner scanner) {
