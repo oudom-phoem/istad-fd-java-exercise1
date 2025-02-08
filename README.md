@@ -8,4 +8,5 @@ Create an array 2D to simulate the cinema hall seat by follow the following requ
 The hall seat shape is like picture below:
 - if the seat is available, the seat code is followed by AV.
 - if the seat is booked, the seat code is followed by BO.
-  ![cinema seats](images/seats.png)
+
+![cinema seats](images/seats.png)
